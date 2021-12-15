@@ -17,11 +17,11 @@ For UI, you an make use Html.(more support to be added)
 * ./views : to add html Files (eventually) this folder gets added to the classpath as well.
 
 ## Support
-[x] linux
-[] Mac (Not tested yet)
-[] Windows
-[] Use html actual files for the views (currently you will have to parse the file on your own)
-[] Create a simple template engine. (variables on htmlText and so on)
+- [x] linux
+- [ ] Mac (Not tested yet)
+- [ ] Windows
+- [ ] Use html actual files for the views (currently you will have to parse the file on your own)
+- [ ] Create a simple template engine. (variables on htmlText and so on)
 
 ## Usage
 
