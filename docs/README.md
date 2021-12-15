@@ -6,7 +6,7 @@ This project is intended to provide a quick way to just code in java.
 Not as production, but if you want to give a quick test of a concept , algorithm, or showcase something
 just clone it , and have the scripts compile and run it, linking libraries and jar files. 
 
-For UI, you an make use Html.(more support to be added)
+For UI, you can make use Html.(more support to be added)
 
 ## file structure
 
