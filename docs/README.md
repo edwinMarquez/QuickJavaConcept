@@ -39,6 +39,6 @@ To create a UI on html, you can:
 2. register your route: router.registerRoute("/", HtmlViewText.class); the class file provides the html text.
 3. create a server with your router: Server server = new Server(router);
 4. start your server:  server.start();
-5. try and automatically call a browser to display:  server.triggerLocalBrowser();
+5. try and automatically call a browser to display:  server.triggerLocalBrowser(); or visit: http://127.0.0.1:4038/ 
 
 
