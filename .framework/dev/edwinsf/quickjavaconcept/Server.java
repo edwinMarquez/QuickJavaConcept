@@ -53,6 +53,7 @@ public class Server {
 
     try {
       ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
+      Logger.d("Server", "server started at: http://127.0.0.1:"+SERVER_PORT);
       while (true) {
         serverThread = new Thread(new ServerProcess(serverSocket));
         serverThread.start();
@@ -63,18 +64,16 @@ public class Server {
         }
       }
     } catch (IOException ioe) {
-      return;
+      Logger.e("Server", ioe.getMessage());;
     }
 
   }
 
   public void triggerLocalBrowser() {
     try{
-      Desktop.getDesktop().browse(new URI("http://127.0.0.1:"+SERVER_PORT));
-    } catch (IOException ioe) {
-      return;
-    } catch (URISyntaxException use) {
-      return;
+      Desktop.getDesktop().browse(new URI("http://127.0.0.1:" + SERVER_PORT));
+    } catch (IOException | URISyntaxException ioe) {
+      Logger.e("Server", ioe.getMessage());
     }
   }
 
@@ -121,7 +120,7 @@ public class Server {
 
         if (viewClass == null) {
           // not found to handle in later release
-          Logger.e("Server", "GET request not found on router");
+          Logger.e("Server", "GET request: "+GETRoute +" not found on router");
           printWriter.write("HTTP/1.1 200 OK\r\n\r\n");
           printWriter.write("<html><head></head><body><h1>404</h1></body></html>");
           printWriter.flush();
@@ -129,12 +128,11 @@ public class Server {
           return;
         }
 
-        HtmlView object = viewClass.getDeclaredConstructor().newInstance();
         printWriter.write("HTTP/1.1 200 OK\r\n\r\n");
-        printWriter.write(object.toHtml());
+        printWriter.write(HtmlViewParser.parse(viewClass));
         printWriter.flush();
         socket.close();
-      } catch (IOException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException ge) {
+      } catch (IOException ge) {
         Logger.e("Server", ge.getMessage());
         return;
       }
