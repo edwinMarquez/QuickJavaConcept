@@ -20,8 +20,8 @@ For UI, you can make use Html.(more support to be added)
 - [x] linux
 - [x] Mac
 - [ ] Windows (to create bash files)
-- [ ] Use html actual files for the views (currently you will have to parse the file on your own)
-- [ ] Create a simple template engine. (variables on htmlText and so on)
+- [x] Use html actual files for the views (currently you will have to parse the file on your own)
+- [x] Create a simple template engine. (variables on htmlText and so on)
 
 ## Usage
 
@@ -41,4 +41,15 @@ To create a UI on html, you can:
 4. start your server:  server.start();
 5. try and automatically call a browser to display:  server.triggerLocalBrowser(); or visit: http://127.0.0.1:4038/ 
 
+### html Support
+To create a UI using Html you can: 
+
+1. Create a html file on ./views directory. 
+2. Create a java class associated with the files that implements HtmlView. and provide the file name, (include the path if you added extra folders), on getViewFileName() method. 
+3. register the routes on a Router , run the server.
+
+### simple tag engine. 
+you can also include methods that return a String , in your HtmlView class , and add them on the HTML file by using <% method() %> 
+
+There is no support for POST request , although you can create navigation by using links. to other routes regsitered.
 
