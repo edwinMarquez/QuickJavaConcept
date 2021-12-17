@@ -22,8 +22,8 @@ public class Main {
     Router router = new Router();
     router.registerRoute("/", HtmlViewText.class);
     Server server = new Server(router);
-    server.start();
     server.triggerLocalBrowser();
+    server.start(); //currently this is a blocking call
 
   }
   

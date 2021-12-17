@@ -19,21 +19,24 @@ For UI, you can make use Html.(more support to be added)
 ## Support
 - [x] linux
 - [x] Mac
-- [ ] Windows (to create bash files)
-- [ ] Use html actual files for the views (currently you will have to parse the file on your own)
-- [ ] Create a simple template engine. (variables on htmlText and so on)
+- [x] Windows
 
 ## Usage
 
 use ~: sh compile.sh to compile the project.
 use ~: sh run.sh to run it
 
-src/Main.java is the main file that gets executed when running run.sh , start your project there or just use that file
+on Windows: 
+use compile.bat to compile
+use run.bat to run
+
+src/Main.java is the main file that gets executed when running run.sh (run.bat), start your project there or just use that file
 
 .framework directory contains the code associated with the small server (just some sockets)
 
 
-To create a UI on html, you can: 
+## html Support
+To create a UI using Html you can: 
 
 1. create a Router object: dev.edwinsf.quickjavaconcept.Router
 2. register your route: router.registerRoute("/", HtmlViewText.class); the class file provides the html text.
@@ -41,4 +44,18 @@ To create a UI on html, you can:
 4. start your server:  server.start();
 5. try and automatically call a browser to display:  server.triggerLocalBrowser(); or visit: http://127.0.0.1:4038/ 
 
+To use an html file: 
+
+1. Create a html file on ./views directory. 
+2. Create a java class associated with the files that implements HtmlView. and provide the file name, (include the path if you added extra folders), on getViewFileName() method. 
+3. register the routes on a Router , run the server.
+
+### Image and Asset support on HTML UI
+to add images and assets on your htmlFile or text you provide, to place them on the ./assets folder, and on html reference them as /assets/yourfilename.extension
+i.e: <img src=\"/assets/your_file.extension\"/>
+
+### simple tag engine. 
+you can also include methods that return a String , in your HtmlView class , and add them on the HTML file by using <% method() %> 
+
+There is no support for POST request , although you can create navigation by using links. to other routes regsitered.
 

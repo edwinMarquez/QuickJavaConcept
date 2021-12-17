@@ -19,6 +19,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URISyntaxException;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 
 import dev.edwinsf.quickjavaconcept.logger.Logger;
 
@@ -116,6 +119,24 @@ public class Server {
             clientMessage.append(line);
           }
         }
+
+        if(GETRoute.startsWith("/assets/")){
+          try{
+
+            byte[] asset = Files.readAllBytes(Paths.get(Server.class.getResource(GETRoute.substring(7)).toURI()));
+            Logger.d("Server","trying to send image: " + GETRoute.substring(7) + "of size: " + asset.length);
+            socket.getOutputStream().write(("HTTP/1.0 200 OK\r\nContent-Length: "+asset.length+"\r\n\r\n").getBytes());
+            socket.getOutputStream().write(asset);
+            socket.getOutputStream().flush();
+            socket.getOutputStream().close();
+          }catch(URISyntaxException uriE){
+            Logger.e("Server", "Error getting image file: " + uriE.getMessage());
+          }
+          printWriter.close();
+          socket.close();
+          return;
+        }
+
         Class<HtmlView> viewClass = router.resolveRoute(GETRoute);
 
         if (viewClass == null) {
