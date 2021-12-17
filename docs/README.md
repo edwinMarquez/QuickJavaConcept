@@ -35,7 +35,7 @@ src/Main.java is the main file that gets executed when running run.sh (run.bat),
 .framework directory contains the code associated with the small server (just some sockets)
 
 
-### html Support
+## html Support
 To create a UI using Html you can: 
 
 1. create a Router object: dev.edwinsf.quickjavaconcept.Router
@@ -48,6 +48,9 @@ To use an html file
 7. Create a html file on ./views directory. 
 8. Create a java class associated with the files that implements HtmlView. and provide the file name, (include the path if you added extra folders), on getViewFileName() method. 
 9. register the routes on a Router , run the server.
+
+### Image and Asset support on HTML UI
+to add images and assets on your htmlFile or text you provide, to place them on the ./assets folder, and on html reference them as /assets/yourfilename.extension
 
 ### simple tag engine. 
 you can also include methods that return a String , in your HtmlView class , and add them on the HTML file by using <% method() %> 
