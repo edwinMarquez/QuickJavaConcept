@@ -44,13 +44,15 @@ To create a UI using Html you can:
 4. start your server:  server.start();
 5. try and automatically call a browser to display:  server.triggerLocalBrowser(); or visit: http://127.0.0.1:4038/ 
 
-To use an html file
-7. Create a html file on ./views directory. 
-8. Create a java class associated with the files that implements HtmlView. and provide the file name, (include the path if you added extra folders), on getViewFileName() method. 
-9. register the routes on a Router , run the server.
+To use an html file: 
+
+1. Create a html file on ./views directory. 
+2. Create a java class associated with the files that implements HtmlView. and provide the file name, (include the path if you added extra folders), on getViewFileName() method. 
+3. register the routes on a Router , run the server.
 
 ### Image and Asset support on HTML UI
 to add images and assets on your htmlFile or text you provide, to place them on the ./assets folder, and on html reference them as /assets/yourfilename.extension
+i.e: <img src=\"/assets/your_file.extension\"/>
 
 ### simple tag engine. 
 you can also include methods that return a String , in your HtmlView class , and add them on the HTML file by using <% method() %> 
