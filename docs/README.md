@@ -19,7 +19,7 @@ For UI, you can make use Html.(more support to be added)
 ## Support
 - [x] linux
 - [x] Mac
-- [x] Windows
+- [x] Windows (pending jar script)
 
 ## Usage
 
@@ -49,6 +49,9 @@ To use an html file:
 1. Create a html file on ./views directory. 
 2. Create a java class associated with the files that implements HtmlView. and provide the file name, (include the path if you added extra folders), on getViewFileName() method. 
 3. register the routes on a Router , run the server.
+
+### retrieve GET Parameters: 
+to retrieve get parameter from your class extending HtmlView, do call getGETParams(), to retrieve a HashMap, with the GET parameters.
 
 ### Image and Asset support on HTML UI
 to add images and assets on your htmlFile or text you provide, to place them on the ./assets folder, and on html reference them as /assets/yourfilename.extension
