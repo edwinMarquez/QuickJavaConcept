@@ -26,12 +26,13 @@ For UI, you can make use Html.(more support to be added)
 
 ## Usage
 
-use ~: sh compile.sh to compile the project.
-use ~: sh run.sh to run it
+* use ~: sh compile.sh to compile the project.
+* use ~: sh run.sh to run it
+* use ~: sh jar.sh to create the standalone(read below) jar file.
 
 on Windows: 
-use compile.bat to compile
-use run.bat to run
+* use compile.bat to compile
+* use run.bat to run
 
 src/Main.java is the main file that gets executed when running run.sh (run.bat), start your project there or just use that file
 
