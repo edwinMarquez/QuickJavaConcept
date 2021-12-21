@@ -14,14 +14,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dev.edwinsf.quickjavaconcept.logger.Logger;
 
@@ -101,6 +102,7 @@ public class Server {
         StringBuilder clientMessage = new StringBuilder();
         String line = null;
         String GETRoute = null;
+        HashMap<String, String> GETparams = new HashMap<>();
         while ((line = bufferedReader.readLine()) != null && !line.isEmpty()) {
           if (line.startsWith("GET")) {
             Logger.d("Server", "get line: " + line);
@@ -114,24 +116,26 @@ public class Server {
               route.append(processChar);
               index++;
               processChar = line.charAt(index);
-            } while (processChar != ' ');
+            } while (processChar != ' ' && processChar != '?');
+            if (processChar == '?') {
+              Pattern pattern = Pattern.compile("([a-zA-Z0-9%+]+)=([a-zA-Z0-9%+]+)");
+              Matcher matcher = pattern.matcher(line.substring(++index));
+              while (matcher.find()) {
+                GETparams.put(matcher.group(1), URLDecoder.decode(matcher.group(2),StandardCharsets.UTF_8));
+              }
+            }
             GETRoute = route.toString().trim();
             clientMessage.append(line);
           }
         }
 
         if(GETRoute.startsWith("/assets/")){
-          try{
-
-            byte[] asset = Files.readAllBytes(Paths.get(Server.class.getResource(GETRoute.substring(7)).toURI()));
+            byte[] asset = Server.class.getResourceAsStream(GETRoute.substring(7)).readAllBytes();
             Logger.d("Server","trying to send image: " + GETRoute.substring(7) + "of size: " + asset.length);
             socket.getOutputStream().write(("HTTP/1.0 200 OK\r\nContent-Length: "+asset.length+"\r\n\r\n").getBytes());
             socket.getOutputStream().write(asset);
             socket.getOutputStream().flush();
             socket.getOutputStream().close();
-          }catch(URISyntaxException uriE){
-            Logger.e("Server", "Error getting image file: " + uriE.getMessage());
-          }
           printWriter.close();
           socket.close();
           return;
@@ -150,7 +154,7 @@ public class Server {
         }
 
         printWriter.write("HTTP/1.1 200 OK\r\n\r\n");
-        printWriter.write(HtmlViewParser.parse(viewClass));
+        printWriter.write(HtmlViewParser.parse(viewClass,GETparams));
         printWriter.flush();
         socket.close();
       } catch (IOException ge) {

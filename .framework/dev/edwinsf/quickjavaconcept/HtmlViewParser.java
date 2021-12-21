@@ -8,11 +8,13 @@
 
 package dev.edwinsf.quickjavaconcept;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,20 +25,26 @@ public class HtmlViewParser {
   private HtmlViewParser() {
   }
 
-  public static String parse(Class<HtmlView> htmlViewClass) {
+  public static String parse(Class<HtmlView> htmlViewClass,HashMap<String,String> getParams) {
 
     try {
       HtmlView htmlViewInstance = htmlViewClass.getDeclaredConstructor().newInstance();
+      InputStream resource = null;
       if (htmlViewInstance.getViewFileName() == null || htmlViewInstance.getViewFileName().isEmpty()) {
-        return (htmlViewInstance.toHtml() == null) ? "" : htmlViewInstance.toHtml();
+        //return (htmlViewInstance.toHtml() == null) ? "" : htmlViewInstance.toHtml();
+        if (htmlViewInstance.toHtml() == null) return "";
+        resource = new ByteArrayInputStream(htmlViewInstance.toHtml().getBytes(StandardCharsets.UTF_8));
       }
-      URL resource = HtmlViewParser.class.getResource("/" + htmlViewInstance.getViewFileName());
+      else {
+        resource = HtmlViewParser.class.getResourceAsStream("/" + htmlViewInstance.getViewFileName());
+      }
+      htmlViewInstance.setGETParams(getParams);
       if (resource == null) {
         Logger.e("HtmlViewParser", "HtmlView file not found on class path: " + htmlViewInstance.getViewFileName());
         return "404";// TODO
       }
-      File file = new File(resource.getFile());
-      FileReader fileReader = new FileReader(file);
+      // File file = new File(resource);
+      InputStreamReader fileReader = new InputStreamReader(resource);
       StringBuilder stringBuilder = new StringBuilder();
 
       int readChar = 0;
