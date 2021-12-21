@@ -62,3 +62,7 @@ you can also include methods that return a String , in your HtmlView class , and
 
 There is no support for POST request , although you can create navigation by using links. to other routes regsitered.
 
+### stand alone jar. 
+if your program relies using HTML UI and uses only content on ./views, and ./assets, you can create a stand alone jar by running, 
+~: sh jar.sh
+This will create a jar file named Myjar.jar that will be selfcontained.
