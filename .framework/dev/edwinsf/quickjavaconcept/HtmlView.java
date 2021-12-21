@@ -8,10 +8,22 @@
 
 package dev.edwinsf.quickjavaconcept;
 
-public interface HtmlView {
+import java.util.HashMap;
 
-  public String getViewFileName();
+public abstract class HtmlView {
 
-  public String toHtml();
+  private HashMap<String, String> getParams = null;
+
+  public HashMap<String,String> getGETParams(){
+    return getParams;
+  }
+
+  protected void setGETParams(HashMap<String,String> getParams){
+    this.getParams = getParams;
+  }
+
+  public abstract String getViewFileName();
+
+  public abstract String toHtml();
 
 }
