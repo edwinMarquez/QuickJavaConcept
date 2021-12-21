@@ -1,8 +1,11 @@
-# Quick Java Concept
+# Quick Java Concept  ☕
 
 ### by edwinmrqz
 
 This project is intended to provide a quick way to just code in java.
+
+If you see yourself withoug an IDE at hand, or just want to use a simple editor (visual studio code i.e. 👌 ) dont let that stop yourself.
+
 Not as production, but if you want to give a quick test of a concept , algorithm, or showcase something
 just clone it , and have the scripts compile and run it, linking libraries and jar files. 
 
@@ -58,9 +61,9 @@ to add images and assets on your htmlFile or text you provide, to place them on 
 i.e: <img src=\"/assets/your_file.extension\"/>
 
 ### simple tag engine. 
-you can also include methods that return a String , in your HtmlView class , and add them on the HTML file by using <% method() %> 
+you can also include methods that return a String , in your HtmlView class , and add them on the HTML file (or the string from your HtmlView.toHtml()) by using <% method() %> 
 
-There is no support for POST request , although you can create navigation by using links. to other routes regsitered.
+There is no support for POST request , although you can create navigation by using links. to other routes regsitered since GET requests are.
 
 ### stand alone jar. 
 if your program relies using HTML UI and uses only content on ./views, and ./assets, you can create a stand alone jar by running, 
