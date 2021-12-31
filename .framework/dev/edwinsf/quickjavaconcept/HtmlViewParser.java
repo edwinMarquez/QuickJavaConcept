@@ -25,7 +25,7 @@ public class HtmlViewParser {
   private HtmlViewParser() {
   }
 
-  public static String parse(Class<HtmlView> htmlViewClass,HashMap<String,String> getParams) {
+  public static String parse(Class<HtmlView> htmlViewClass,HashMap<String,String> getParams, HashMap<String,Object> postParams) {
 
     try {
       HtmlView htmlViewInstance = htmlViewClass.getDeclaredConstructor().newInstance();
@@ -39,6 +39,7 @@ public class HtmlViewParser {
         resource = HtmlViewParser.class.getResourceAsStream("/" + htmlViewInstance.getViewFileName());
       }
       htmlViewInstance.setGETParams(getParams);
+      htmlViewInstance.setPOSTParams(postParams);
       if (resource == null) {
         Logger.e("HtmlViewParser", "HtmlView file not found on class path: " + htmlViewInstance.getViewFileName());
         return "404";// TODO

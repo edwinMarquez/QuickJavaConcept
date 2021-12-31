@@ -55,16 +55,17 @@ To use an html file:
 3. register the routes on a Router , run the server.
 
 ### retrieve GET Parameters: 
-to retrieve get parameter from your class extending HtmlView, do call getGETParams(), to retrieve a HashMap, with the GET parameters.
+to retrieve get parameters from your class extending HtmlView, do call getGETParams(), to retrieve a HashMap, with the GET parameters.
+
+### retrieve POST Parameters: 
+to retrieve post parameters from your class extending HtmlView, do call getPOSTParams(), to retrieve a HashMap, with the POST parameters. (Post support is currently only for URL encoded parameters, like in the sample main activity). 
 
 ### Image and Asset support on HTML UI
-to add images and assets on your htmlFile or text you provide, to place them on the ./assets folder, and on html reference them as /assets/yourfilename.extension
+to add images and assets on your htmlFile or text you provide, just place them on the ./assets folder, and on html reference them as /assets/yourfilename.extension
 i.e: <img src=\"/assets/your_file.extension\"/>
 
 ### simple tag engine. 
 you can also include methods that return a String , in your HtmlView class , and add them on the HTML file (or the string from your HtmlView.toHtml()) by using <% method() %> 
-
-There is no support for POST request , although you can create navigation by using links. to other routes regsitered since GET requests are.
 
 ### stand alone jar. 
 if your program relies using HTML UI and uses only content on ./views, and ./assets, you can create a stand alone jar by running, 
