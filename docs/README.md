@@ -1,8 +1,11 @@
-# Quick Java Concept
+# Quick Java Concept  ☕
 
 ### by edwinmrqz
 
 This project is intended to provide a quick way to just code in java.
+
+If you see yourself withoug an IDE at hand, or just want to use a simple editor (visual studio code i.e. 👌 ) dont let that stop yourself.
+
 Not as production, but if you want to give a quick test of a concept , algorithm, or showcase something
 just clone it , and have the scripts compile and run it, linking libraries and jar files. 
 
@@ -19,16 +22,17 @@ For UI, you can make use Html.(more support to be added)
 ## Support
 - [x] linux
 - [x] Mac
-- [x] Windows
+- [x] Windows (pending jar script)
 
 ## Usage
 
-use ~: sh compile.sh to compile the project.
-use ~: sh run.sh to run it
+* use ~: sh compile.sh to compile the project.
+* use ~: sh run.sh to run it
+* use ~: sh jar.sh to create the standalone(read below) jar file.
 
 on Windows: 
-use compile.bat to compile
-use run.bat to run
+* use compile.bat to compile
+* use run.bat to run
 
 src/Main.java is the main file that gets executed when running run.sh (run.bat), start your project there or just use that file
 
@@ -50,12 +54,19 @@ To use an html file:
 2. Create a java class associated with the files that implements HtmlView. and provide the file name, (include the path if you added extra folders), on getViewFileName() method. 
 3. register the routes on a Router , run the server.
 
+### retrieve GET Parameters: 
+to retrieve get parameter from your class extending HtmlView, do call getGETParams(), to retrieve a HashMap, with the GET parameters.
+
 ### Image and Asset support on HTML UI
 to add images and assets on your htmlFile or text you provide, to place them on the ./assets folder, and on html reference them as /assets/yourfilename.extension
 i.e: <img src=\"/assets/your_file.extension\"/>
 
 ### simple tag engine. 
-you can also include methods that return a String , in your HtmlView class , and add them on the HTML file by using <% method() %> 
+you can also include methods that return a String , in your HtmlView class , and add them on the HTML file (or the string from your HtmlView.toHtml()) by using <% method() %> 
 
-There is no support for POST request , although you can create navigation by using links. to other routes regsitered.
+There is no support for POST request , although you can create navigation by using links. to other routes regsitered since GET requests are.
 
+### stand alone jar. 
+if your program relies using HTML UI and uses only content on ./views, and ./assets, you can create a stand alone jar by running, 
+~: sh jar.sh
+This will create a jar file named Myjar.jar that will be selfcontained.
