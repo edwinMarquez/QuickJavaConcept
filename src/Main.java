@@ -33,7 +33,7 @@ public class Main {
       return null; //this takes precedence, if not null toHtml will be ignored
     }
 
-    public String someMethod() {
+    public String getParams() {
       //to retrieve get parameter you can call getGETParams().
       StringBuilder params = new StringBuilder("<ul>");
       for (Map.Entry<String, String> entry : getGETParams().entrySet()) {
@@ -42,13 +42,29 @@ public class Main {
         params.append("</li>");
       }
       params.append("</ul>");
-      return "params: <br>" + params.toString();
+      return "<br>" + params.toString();
+    }
+
+
+    public String postParams() {
+      // to retrieve post parameter you can call getPOSTParams().
+      StringBuilder params = new StringBuilder("<ul>");
+      for (Map.Entry<String, Object> entry : getPOSTParams().entrySet()) {
+        params.append("<li>");
+        params.append(entry.getKey() + "=" + entry.getValue());
+        params.append("</li>");
+      }
+      params.append("</ul>");
+      return "<br>" + params.toString();
     }
 
     @Override
     public String toHtml() {
       //you can call methods in you java code from html, <% someMethod() %>
-      return "<html><head><title>Test title</title></head><body>Hello world</br><% someMethod() %></body></html>";
+      return "<html><head><title>Test title</title></head><body>Hello world</br>get params: <%getParams()%> </br>post params:</br><% postParams() %></br>"+
+        "<form action=\"/?getparam1=a&getparam2=b\" method=\"post\"><label for=\"fname\">First name:</label><input type=\"text\" id=\"fname\" name=\"fname\"><br><br>"+
+        "<label for=\"lname\">Last name:</label><input type=\"text\" id=\"lname\" name=\"lname\"><br><br><input type=\"submit\" value=\"Submit\">"+
+        "</form></body></html>";
     }
   }
 
